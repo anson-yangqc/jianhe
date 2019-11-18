@@ -78,12 +78,13 @@ border-1px($color)
 优点：基本所有场景都能满足，包含圆角的button，单条，多条线     
 缺点：大量使用渐变可能导致性能瓶颈
 ```
-# 2、3倍图处理
+# 2、3倍图处理 
 ```
 bg-image($url)
   background-image: url($url + "@2x.png")
   @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
     background-image: url($url + "@3x.png")
+//调用 bg-image('first') 图片名 first@2x.png first@3x.png
 ```
 ```
 本人用stylus，基本原理就是根据 @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)判断，然后用UI给的不同图片。
