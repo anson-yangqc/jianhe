@@ -1,0 +1,240 @@
+<html>
+
+<head>
+	<meta lang="utf-8">
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box
+		}
+
+		ul {
+			list-style: none
+		}
+
+		.testWrap {
+			border: 1px solid #eee;
+			width: 300px;
+			margin: 0 auto;
+		}
+
+		.testWrap .title {
+			background: #eee;
+			height: 30px;
+			line-height: 30px;
+		}
+
+		.testWrap .content {
+			padding: 10px;
+			overflow: hidden;
+		}
+
+		.testWrap .content li {
+			margin: 5px;
+			border-radius: 5px;
+			min-width: calc(50% - 10px);
+			border: 1px solid #ccc;
+			text-align: center;
+			height: 30px;
+			line-height: 30px;
+			float: left;
+		}
+	</style>
+</head>
+
+<body>
+	<div>
+		<div class="testWrap">
+			<div class="title">title1</div>
+			<ul class="content">
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+			</ul>
+		</div>
+		<div class="testWrap">
+			<div class="title">title1</div>
+			<ul class="content">
+				<li class='conLi'>50%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+			</ul>
+		</div>
+		<div class="testWrap">
+			<div class="title">title1</div>
+			<ul class="content">
+				<li class='conLi'>50%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>50%</li>
+			</ul>
+		</div>
+		<div class="testWrap">
+			<div class="title">title1</div>
+			<ul class="content">
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>50%</li>
+			</ul>
+		</div>
+		<div class="testWrap">
+			<div class="title">title2</div>
+			<ul class="content">
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+			</ul>
+		</div>
+		<div class="testWrap">
+			<div class="title">title2</div>
+			<ul class="content">
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>宽度100%宽度100%</li>
+			</ul>
+		</div>
+		<div class="testWrap">
+			<div class="title">title3</div>
+			<ul class="content">
+				<li class='conLi'>宽度100%宽度100%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+			</ul>
+		</div>
+		<div class="testWrap">
+			<div class="title">title4</div>
+			<ul class="content">
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+				<li class='conLi'>50%</li>
+			</ul>
+		</div>
+	</div>
+	<script type="text/javascript">
+		const testWrapDoms = document.querySelectorAll('.testWrap')
+		var itemWrapDoms = testWrapDoms,
+			liClassName = '.conLi'
+		reSetDomStyle()
+
+		function reSetDomStyle() {
+			setWidth() //大于1半的设置100%宽
+			setOrderByWidth() //根据宽度加序号
+			setSpec() //处理特殊,遇到100%宽，上面的是50%宽且是基数
+			setLast() //处理最后一个，宽是50%且为最后一个
+		}
+
+		function setWidth() {
+			var doms = itemWrapDoms
+			for (let i = 0; i < doms.length; i++) {
+				const dom = doms[i]
+				var subDoms = dom.querySelectorAll(liClassName)
+				for (let j = 0; j < subDoms.length; j++) {
+					const subDom = subDoms[j]
+					if (subDom) {
+						const subDomW = subDom.offsetWidth
+						if (subDomW > 130) {
+							subDom.style.width = 'calc(100% - 10px)'
+							subDom.classList.add('width100')
+						} else {
+							subDom.classList.add('width50')
+						}
+					}
+				}
+			}
+		}
+
+		function setOrderByWidth() {
+			var doms = itemWrapDoms
+			for (let i = 0; i < doms.length; i++) {
+				const dom = doms[i]
+				var subDoms = dom.querySelectorAll(liClassName + '.width100')
+				for (let j = 0; j < subDoms.length; j++) {
+					const subDom = subDoms[j]
+					if (subDom) {
+						subDom.setAttribute('data-width100Order', j + 1)
+					}
+				}
+				var subDoms50 = dom.querySelectorAll(liClassName + '.width50')
+				for (let jj = 0; jj < subDoms50.length; jj++) {
+					const subDom = subDoms50[jj]
+					if (subDom) {
+						subDom.setAttribute('data-width50Order', jj + 1)
+					}
+				}
+			}
+		}
+
+		function setSpec() {
+			var doms = itemWrapDoms
+			for (let i = 0; i < doms.length; i++) {
+				const dom = doms[i]
+				const subDoms = dom.querySelectorAll(liClassName)
+				for (let j = 0; j < subDoms.length; j++) {
+					const subDom = subDoms[j]
+					if (subDom && subDom.classList.contains('width100')) {
+						const preDom = subDoms[j - 1]
+						if (preDom && Number(preDom.getAttribute('data-width50order')) % 2 != 0) {
+							preDom.classList.remove('width50')
+							preDom.removeAttribute('data-width50order')
+							preDom.classList.add('width100')
+							preDom.style.width = 'calc(100% - 10px)'
+							setOrderByWidth()
+							setSpec()
+							break;
+						}
+					}
+				}
+			}
+		}
+
+		function setLast() {
+			var doms = itemWrapDoms
+			for (let i = 0; i < doms.length; i++) {
+				const dom = doms[i]
+				const subDoms = dom.querySelectorAll(liClassName)
+				const subDom = subDoms[subDoms.length - 1]
+				if (subDom && subDom.classList.contains('width50') && Number(subDom.getAttribute('data-width50order')) % 2 !=
+					0) {
+					subDom.classList.remove('width50')
+					subDom.removeAttribute('data-width50order')
+					subDom.classList.add('width100')
+					subDom.style.width = 'calc(100% - 10px)'
+				}
+			}
+		}
+	</script>
+
+</body>
+
+</html>
